@@ -43,17 +43,23 @@ function evaluate(x₀, x₁, t₀, t₁, t, n=0)
     x = (t - t₀) / (t₁ - t₀)
 
     # choose derivative
-    n == 0 ? g = f : n == 1 ? g = fp : n == 2 ? g = fpp : error("higher derivatives not implemented yet")
+    if n == 0
+        return t < t₀ ? x₀ : t₀ ≤ t ≤ t₁ ? x₀ + (x₁ - x₀) * f(x) : t > t₁ ? x₁ : error("t = $t not a number?")
+    elseif n == 1
+        return t < t₀ ? 0.0 : t₀ ≤ t ≤ t₁ ? (x₁ - x₀) * fp(x) : t > t₁ ? 0.0 : error("t = $t not a number?")
+    elseif n == 2
+        return t < t₀ ? 0.0 : t₀ ≤ t ≤ t₁ ? (x₁ - x₀) * fpp(x) : t > t₁ ? 0.0 : error("t = $t not a number?")
+    else
+        error("higher derivatives not implemented yet")
+    end
 
-    return t < t₀ ? x₀ : t₀ ≤ t ≤ t₁ ? x₀ + (x₁ - x₀) * g(x) : t > t₁ ? x₁ : error("t = $t not a number?")
 end
 
 evaluate(r::Ramp, t, n=0) = evaluate(r.x₀, r.x₁, r.t₀, r.t₁, t, n)
 
 function evaluate(r::MultiRamp, t, n=0)
     x₀ = r.ramps[1].x₀
-    t₀ = r.ramps[1].t₀
-    t < t₀ && return x₀
+    t₀ = r.ramps[1].t₁
 
     for ramp in r.ramps
         t ≤ ramp.t₁ && return evaluate(ramp, t, n)

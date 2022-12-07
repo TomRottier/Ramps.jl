@@ -2,3 +2,6 @@ name = "Ramps"
 uuid = "620c3add-4af5-46cb-82b5-af0dc8736fda"
 authors = ["tom <tomrottier@hotmail.com>"]
 version = "0.1.0"
+
+[compat]
+julia = "1"

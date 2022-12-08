@@ -46,9 +46,9 @@ function evaluate(x₀, x₁, t₀, t₁, t, n=0)
     if n == 0
         return t < t₀ ? x₀ : t₀ ≤ t ≤ t₁ ? x₀ + (x₁ - x₀) * f(x) : t > t₁ ? x₁ : error("t = $t not a number?")
     elseif n == 1
-        return t < t₀ ? 0.0 : t₀ ≤ t ≤ t₁ ? (x₁ - x₀) * fp(x) : t > t₁ ? 0.0 : error("t = $t not a number?")
+        return t < t₀ ? 0.0 : t₀ ≤ t ≤ t₁ ? (x₁ - x₀) / (t₁ - t₀) * fp(x) : t > t₁ ? 0.0 : error("t = $t not a number?")
     elseif n == 2
-        return t < t₀ ? 0.0 : t₀ ≤ t ≤ t₁ ? (x₁ - x₀) * fpp(x) : t > t₁ ? 0.0 : error("t = $t not a number?")
+        return t < t₀ ? 0.0 : t₀ ≤ t ≤ t₁ ? (x₁ - x₀) / (t₁ - t₀)^2 * fpp(x) : t > t₁ ? 0.0 : error("t = $t not a number?")
     else
         error("higher derivatives not implemented yet")
     end

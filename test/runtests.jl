@@ -1,4 +1,4 @@
-using Test, Ramps
+using Test, Ramps, ForwardDiff
 
 @testset "all" verbose = true begin
     @testset "polynomial" verbose = true begin
@@ -8,6 +8,18 @@ using Test, Ramps
         @test Ramps.fp(1) == 0
         @test Ramps.fpp(0) == 0
         @test Ramps.fpp(1) == 0
+        @test Ramps.f(0.5) == 0.5
+        @test Ramps.fp(0.5) == 1.875
+        @test Ramps.fpp(0.5) == 0.0
+
+        # compare derivatives to Automatic Differentiation
+        test_fp(t) = ForwardDiff.derivative(Ramps.f, t)
+        @test Ramps.fp(0.2) ≈ ForwardDiff.derivative(Ramps.f, 0.2)
+        @test Ramps.fp(0.1234) ≈ ForwardDiff.derivative(Ramps.f, 0.1234)
+        @test Ramps.fpp(0.2) ≈ ForwardDiff.derivative(test_fp, 0.2)
+        @test Ramps.fpp(0.1234) ≈ ForwardDiff.derivative(test_fp, 0.1234)
+
+
     end
 
     @testset "single ramp" verbose = true begin

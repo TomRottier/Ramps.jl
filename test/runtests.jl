@@ -30,6 +30,12 @@ using Test, Ramps, ForwardDiff
         @test evaluate(r, 1.5, 1) == 0.0
         @test evaluate(r, 0.0, 2) == 0.0
         @test evaluate(r, 1.5, 2) == 0.0
+        @test evaluate(r, 100, 1) == 0
+        @test evaluate(r, 100, 2) == 0
+        @test evaluate(r, -100, 1) == 0
+        @test evaluate(r, -100, 2) == 0
+
+
 
     end
 

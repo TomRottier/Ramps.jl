@@ -67,7 +67,7 @@ function evaluate(r::MultiRamp, t, n=0)
         t₀ = ramp.t₁
     end
 
-    return r.ramps[end].x₁
+    return evaluate(r.ramps[end], t, n)
 end
 
 end

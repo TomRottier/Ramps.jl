@@ -7,6 +7,13 @@ struct Ramp
     x₁::Float64
     t₀::Float64
     t₁::Float64
+
+    # checks
+    function Ramp(x₀, x₁, t₀, t₁)
+        t₁ ≤ t₀ && error("t₁ must be > t₀")
+
+        return new(x₀, x₁, t₀, t₁)
+    end
 end
 
 struct MultiRamp

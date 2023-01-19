@@ -4,7 +4,9 @@
 Exports the `Ramp` type which, when evaluated, smoothly ramp up from one level to another over a specified time, with zero first and second derivatives at endpoints, `MultiRamp` type which chains together multiple ramps, and `evaluate` to evaluate the ramp, or its derivative, at any given time.
 
 ## Maths
-Solve system of equations to determine coefficients for a quintic polynomial (chosen so that the second derivative is a cubic) so that the quintic polynomial $x(t)$ gives $x(0) = 0$, $x(1) = 1$, $x'(0) = 0$, $x'(1) = 0$, $x''(0) = 0$, and $x''(1) = 0$. Resulting polynomial is then scaled for any range $(x_0, x_1)$ and any domain $(t_0,t_1)$. If $t < t_0$ then $x(t) = x_0$ and if $t > t_1$ then $x(t) = x_1$
+Solve system of equations to determine coefficients for a quintic polynomial (chosen so that the second derivative is a cubic) so that the quintic polynomial $x(t)$ gives $x(0) = 0$, $x(1) = 1$, $x'(0) = 0$, $x'(1) = 0$, $x''(0) = 0$, and $x''(1) = 0$. Resulting polynomial is then scaled for any range $(x_0, x_1)$ and any domain $(t_0,t_1)$. If $t < t_0$ then $x(t) = x_0$ and if $t > t_1$ then $x(t) = x_1$. The ramp is shown below:
+
+![ramp pic](assets/f.png)
 
 ## Installation
 ```julia
